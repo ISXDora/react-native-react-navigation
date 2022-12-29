@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -11,39 +12,34 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Text, View} from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+function HomeScreen() {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+function DetailsScreen() {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
 
+const Stack = createNativeStackNavigator();
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  function HomeScreen() {
-    return (
-      // eslint-disable-next-line react-native/no-inline-styles
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Home</Text>
-      </View>
-    );
-  }
-
-  const Stack = createNativeStackNavigator();
-
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator initialRouteName="Details">
+        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Overview'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
